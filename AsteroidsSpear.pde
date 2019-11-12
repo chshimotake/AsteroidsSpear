@@ -1,5 +1,6 @@
 //your variable declarations 
 Chastiefol spear;
+RightBlade rBlade;
 boolean spin=false;
 public void setup() 
 {
@@ -7,59 +8,86 @@ public void setup()
   background(0,0,0);
   frameRate(6000);
   spear=new Chastiefol();
+  rBlade=new RightBlade();
 }
 public void draw() 
 {
-  fill(0,0,0, 25);
+  fill(0,0,0);
   rect(0,0,1000,1000);
-  spear.myCenterX=mouseX;
-  spear.myCenterY=mouseY;
-  spear.show();
-  spear.move();
+  //spear.myCenterX=mouseX;
+  //spear.myCenterY=mouseY;
+  spearShow();
+  spearMove();
 }
 public void keyPressed()
 {
 	switch(key){
-		/*case 'w':
-			spear.accelerate(5);
+		case 'w':
+			spearAccel(5);
 		break;
 		case 's':
-			spear.accelerate(-5);
-		break;*/
+			spearAccel(-5);
+		break;
 		case 'a':
 			if(spin==false)
 			{
-				spear.turn(-10);
+				spearTurn(-10);
 			}
 			if(spin==true)
 			{
 				for(int i=0;i<20;i++)
 				{
-					spear.turn(-10);
-					spear.show();
+					spearTurn(-10);
+					spearShow();
 				}
 			}
 		break;
 		case 'd':
 			if(spin==false)
 			{
-				spear.turn(10);
+				spearTurn(10);
 			}
 			if(spin==true)
 			{
 				for(int i=0;i<30;i++)
 				{
-					spear.turn(10);
-					spear.show();
+					spearTurn(10);
+					spearShow();
 				}
 			}
 		break;
 		case 'f':
-			spear.setDirectionX(0);
-			spear.setDirectionY(0);
+			spearStop();
 		break;
 		case 'e':
 			spin=!spin;
 	}
+}
+void spearMove()
+{
+	spear.move();
+	rBlade.move();
+}
+void spearShow()
+{
+	spear.show();
+	rBlade.show();
+}
+void spearAccel(int a)
+{
+	spear.accelerate(a);
+	rBlade.accelerate(a);
+}
+void spearTurn(int a)
+{
+	spear.turn(a);
+	rBlade.turn(a);
+}
+void spearStop()
+{
+	spear.setDirectionX(0);
+	spear.setDirectionY(0);
+	rBlade.setDirectionX(0);
+	rBlade.setDirectionY(0);
 }
 
