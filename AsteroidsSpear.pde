@@ -23,8 +23,9 @@ InnerEndHole iEHole;
 SideEndHole sEHole;
 EndTip eTip;
 SideBlade sBlade;
+Increase dagger;
 boolean spin=false, side=true;
-int edge=0,frame=0;
+int edge=0,frame=0, form=1;
 public void setup() 
 {
   size(1000,1000);
@@ -54,6 +55,7 @@ public void setup()
   iEHole=new InnerEndHole();
   sEHole=new SideEndHole();
   eTip=new EndTip();
+  dagger=new Increase();
 }
 public void draw() 
 {
@@ -63,14 +65,15 @@ public void draw()
   //spear.myCenterY=mouseY;
   if(side==false)
   {
-  	spearShow();
+  	//spearShow();
   }else if(side==true)
   {
-  	spearSideShow();
+  	//spearSideShow();
   }
   spearMove();
   spearSideMove();
-  spearDrill();
+  //spearDrill();
+  dagger.show();
 }
 public void keyPressed()
 {
