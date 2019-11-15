@@ -24,7 +24,6 @@ SideEndHole sEHole;
 EndTip eTip;
 SideBlade sBlade;
 Increase dagger;
-RightBlade point;
 boolean spin=false, side=true, topBot=false;
 int edge=0,frame=0, form=1,shade=0;
 public void setup() 
@@ -32,7 +31,6 @@ public void setup()
   size(1000,1000);
   background(0,0,0);
   frameRate(6000);
-  point=new Chastiefol();
   spear=new Chastiefol();
   spearSide=new ChastiefolSide();
   rBlade=new RightBlade();
