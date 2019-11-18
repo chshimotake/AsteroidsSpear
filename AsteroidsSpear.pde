@@ -27,6 +27,8 @@ Increase dagger;
 Sunflower sun;
 boolean spin=false, side=true;
 int edge=0,frame=0, form=1;
+boolean spin=false, side=true, topBot=false;
+int edge=0,frame=0, form=1,shade=0;
 public void setup() 
 {
   size(1000,1000);
@@ -67,16 +69,17 @@ public void draw()
   //spear.myCenterY=mouseY;
   if(side==false)
   {
-  	//spearShow();
+  	spearShow();
   }else if(side==true)
   {
-  	//spearSideShow();
+  	spearSideShow();
   }
   spearMove();
   spearSideMove();
   //spearDrill();
   dagger.show();
   sun.show();
+  //dagger.show();
 }
 public void keyPressed()
 {
@@ -163,6 +166,63 @@ public void keyPressed()
 			side=true;
 			edge++;
 		break;
+		case ' ':
+			for(int i=0;i<40;i++)
+			{
+				if(i%2==0)
+				{
+					spearTurn(10);
+					spearSideTurn(10);
+					spearShow();
+					spearSideShow();
+				}
+			}
+			spear.sizeChange=1;
+			for(int i=0;i<40;i++)
+			{
+				if(i%2==0)
+				{
+					spearTurn(10);
+					spearSideTurn(10);
+					spearShow();
+					spearSideShow();
+				}
+			}
+			spear.sizeChange=0;
+			for(int i=0;i<20;i++)
+			{
+				if(i%2==0)
+				{
+					spearTurn(10);
+					spearSideTurn(10);
+					spearShow();
+					spearSideShow();
+				}
+			}
+			spearSetX((int)(Math.random()*1000));
+			spearSetY((int)(Math.random()*1000));
+			spear.sizeChange=1;
+			for(int i=0;i<40;i++)
+			{
+				if(i%2==0)
+				{
+					spearTurn(10);
+					spearSideTurn(10);
+					spearShow();
+					spearSideShow();
+				}
+			}
+			spear.sizeChange=2;
+			for(int i=0;i<40;i++)
+			{
+				if(i%2==0)
+				{
+					spearTurn(10);
+					spearSideTurn(10);
+					spearShow();
+					spearSideShow();
+				}
+			}
 	}
 }
 void spearDrill()
@@ -203,7 +263,7 @@ void spearSideShow()
 	}
 	sTCircle.show();
 	sBCircle.show();
-	sHPoint.show();
+	sHPoint.show(); 
 	hTop.show();
 	hMid.show();
 	hBot.show();
@@ -307,6 +367,42 @@ void spearAccel(int a)
 	oEHole.accelerate(a);
 	iEHole.accelerate(a);
 	eTip.accelerate(a);
+}
+void spearSetX(int a)
+{
+	spear.setX(a);
+	rBlade.setX(a);
+	lBlade.setX(a);
+	head.setX(a);
+	rPCircle.setX(a);
+	lPCircle.setX(a);
+	oHHole.setX(a);
+	iHHole.setX(a);
+	hPoint.setX(a);
+	hTop.setX(a);
+	hMid.setX(a);
+	hBot.setX(a);
+	oEHole.setX(a);
+	iEHole.setX(a);
+	eTip.setX(a);
+}
+void spearSetY(int a)
+{
+	spear.setY(a);
+	rBlade.setY(a);
+	lBlade.setY(a);
+	head.setY(a);
+	rPCircle.setY(a);
+	lPCircle.setY(a);
+	oHHole.setY(a);
+	iHHole.setY(a);
+	hPoint.setY(a);
+	hTop.setY(a);
+	hMid.setY(a);
+	hBot.setY(a);
+	oEHole.setY(a);
+	iEHole.setY(a);
+	eTip.setY(a);
 }
 void spearTurn(int a)
 {
