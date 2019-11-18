@@ -24,6 +24,7 @@ SideEndHole sEHole;
 EndTip eTip;
 SideBlade sBlade;
 Increase dagger;
+Sunflower sun;
 boolean spin=false, side=true;
 int edge=0,frame=0, form=1;
 public void setup() 
@@ -56,6 +57,7 @@ public void setup()
   sEHole=new SideEndHole();
   eTip=new EndTip();
   dagger=new Increase();
+  sun=new Sunflower();
 }
 public void draw() 
 {
@@ -74,6 +76,7 @@ public void draw()
   spearSideMove();
   //spearDrill();
   dagger.show();
+  sun.show();
 }
 public void keyPressed()
 {
