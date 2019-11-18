@@ -30,7 +30,7 @@ public void setup()
 {
   size(1000,1000);
   background(0,0,0);
-  frameRate(6000);
+  frameRate(60);
   spear=new Chastiefol();
   spearSide=new ChastiefolSide();
   rBlade=new RightBlade();
