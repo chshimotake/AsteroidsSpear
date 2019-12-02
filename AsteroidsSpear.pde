@@ -75,8 +75,8 @@ public void draw()
   spearMove();
   spearSideMove();
   //spearDrill();
-  dagger.show();
-  sun.show();
+  //dagger.show();
+  //sun.show();
   //dagger.show();
 }
 public void keyPressed()
