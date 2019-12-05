@@ -26,58 +26,205 @@ SideBlade sBlade;
 Increase dagger;
 Sunflower sun;
 boolean spin=false, side=false, topBot=false;
-int edge=0,frame=0, form=1,shade=0;
+int edge=0,frame=0, form=1,shade=0, incrFrame=0;
+ArrayList<Integer> incrX=new ArrayList<Integer>();
+ArrayList<Integer> incrY=new ArrayList<Integer>();
+ArrayList<Integer> incrPoint=new ArrayList<Integer>();
+ArrayList<Double> incrDirX=new ArrayList<Double>();
+ArrayList<Double> incrDirY=new ArrayList<Double>();
+ArrayList<Increase> incrTrail=new ArrayList<Increase>();
 public void setup() 
 {
-  size(1000,1000);
-  background(0,0,0);
-  frameRate(60);
-  spear=new Chastiefol();
-  spearSide=new ChastiefolSide();
-  rBlade=new RightBlade();
-  sRBlade=new SideRightBlade();
-  lBlade=new LeftBlade();
-  sLBlade=new SideLeftBlade();
-  sBlade=new SideBlade();
-  rPCircle=new RightPointCircle();
-  sTCircle=new SideTopCircle();
-  lPCircle=new LeftPointCircle();
-  sBCircle=new SideBotCircle();
-  oHHole=new OuterHeadHole();
-  iHHole=new InnerHeadHole();
-  head=new Head();
-  sHead=new SideHead();
-  hPoint=new HeadPoint();
-  sHPoint=new SideHeadPoint();
-  hTop=new HandleTop();
-  hMid=new HandleMid();
-  hBot=new HandleBot();
-  oEHole=new OuterEndHole();
-  iEHole=new InnerEndHole();
-  sEHole=new SideEndHole();
-  eTip=new EndTip();
-  dagger=new Increase();
-  sun=new Sunflower();
+	size(1000,1000);
+	background(0,0,0);
+	frameRate(60);
+	spear=new Chastiefol();
+	spearSide=new ChastiefolSide();
+	rBlade=new RightBlade();
+	sRBlade=new SideRightBlade();
+	lBlade=new LeftBlade();
+	sLBlade=new SideLeftBlade();
+	sBlade=new SideBlade();
+	rPCircle=new RightPointCircle();
+	sTCircle=new SideTopCircle();
+	lPCircle=new LeftPointCircle();
+	sBCircle=new SideBotCircle();
+	oHHole=new OuterHeadHole();
+	iHHole=new InnerHeadHole();
+	head=new Head();
+	sHead=new SideHead();
+	hPoint=new HeadPoint();
+	sHPoint=new SideHeadPoint();
+	hTop=new HandleTop();
+	hMid=new HandleMid();
+	hBot=new HandleBot();
+	oEHole=new OuterEndHole();
+	iEHole=new InnerEndHole();
+	sEHole=new SideEndHole();
+	eTip=new EndTip();
+	dagger=new Increase();
+	sun=new Sunflower();
+
+	for(int i=0;i<5;i++)
+	{
+		incrX.add(i, dagger.getX());
+		incrY.add(i, dagger.getY());
+		incrDirX.add(i, dagger.getDirectionX());
+		println("bleh");
+		incrDirY.add(i, dagger.getDirectionY());
+		incrPoint.add(i, (int)(dagger.getPointDirection()));
+		incrTrail.add(i, new Increase());
+	}
 }
 public void draw() 
 {
-  fill(0,0,0,50);//,25);
-  rect(0,0,1000,1000);
-  //spear.myCenterX=mouseX;
-  //spear.myCenterY=mouseY;
-  if(side==false)
-  {
-  	spearShow();
-  }else if(side==true)
-  {
-  	spearSideShow();
-  }
-  spearMove();
-  spearSideMove();
-  //spearDrill();
-  //dagger.show();
-  //sun.show();
-  //dagger.show();
+	fill(0,0,0);//,50);//,25);
+	rect(0,0,1000,1000);
+	//spear.myCenterX=mouseX;
+	//spear.myCenterY=mouseY;
+	if(side==false)
+	{
+		//spearShow();
+	}else if(side==true)
+	{
+		//spearSideShow();
+	}
+	spearMove();
+	spearSideMove();
+	//spearDrill();
+	incrShow();
+	incrMove();
+	//sun.show();
+	//dagger.show();
+	if(incrDirX.size()==5)
+	{
+		incrDirX.set(4,incrDirX.get(3));
+		println(incrDirX.get(4));
+
+		incrDirX.set(3,incrDirX.get(2));
+		println(incrDirX.get(3));
+
+		incrDirX.set(2,incrDirX.get(1));
+		println(incrDirX.get(2));
+
+		incrDirX.set(1,incrDirX.get(0));
+		println(incrDirX.get(1));
+
+		incrDirX.set(0,dagger.getDirectionX());
+		println("increase dirX: "+incrDirX.get(0));
+		println("dagger dirX: "+dagger.getDirectionX());
+
+
+
+		incrDirY.set(4,incrDirY.get(3));
+		incrDirY.set(3,incrDirY.get(2));
+		incrDirY.set(2,incrDirY.get(1));
+		incrDirY.set(1,incrDirY.get(0));
+		incrDirY.set(0,dagger.getDirectionY());
+	}
+	if(incrDirX.size()==4)
+	{
+		incrDirX.set(3,incrDirX.get(2));
+		incrDirX.set(2,incrDirX.get(1));
+		incrDirX.set(1,incrDirX.get(0));
+		incrDirX.set(0,dagger.getDirectionX());
+
+		incrDirY.set(3,incrDirY.get(2));
+		incrDirY.set(2,incrDirY.get(1));
+		incrDirY.set(1,incrDirY.get(0));
+		incrDirY.set(0,dagger.getDirectionY());
+	}
+	if(incrDirX.size()==3)
+	{
+		incrDirX.set(2,incrDirX.get(1));
+		incrDirX.set(1,incrDirX.get(0));
+		incrDirX.set(0,dagger.getDirectionX());
+
+		incrDirY.set(2,incrDirY.get(1));
+		incrDirY.set(1,incrDirY.get(0));
+		incrDirY.set(0,dagger.getDirectionY());
+	}
+	if(incrDirX.size()==2)
+	{
+		incrDirX.set(1,incrDirX.get(0));
+		incrDirX.set(0,dagger.getDirectionX());
+
+		incrDirY.set(1,incrDirY.get(0));
+		incrDirY.set(0,dagger.getDirectionY());
+	}
+	if(incrDirX.size()==1)
+	{
+		incrDirX.set(0,dagger.getDirectionX());
+		incrDirY.set(0,dagger.getDirectionY());
+	}
+	if(incrDirX.size()==0)
+	{
+		incrDirX.set(0,dagger.getDirectionX());
+		incrDirY.set(0,dagger.getDirectionY());
+	}
+	for(int i=0;i<5;i++)
+	{
+		incrTrail.get(i).setDirectionX(incrDirX.)
+	}
+	int test=incrDirX.size();
+	//println(test);
+	/*
+	if(incrFrame%8==0)
+	{
+		if(incrX.size()<5)
+		{
+			incrX.add(0, dagger.getX());
+			incrY.add(0, dagger.getY());
+			incrDirX.add(0, dagger.getDirectionX());
+			incrDirY.add(0, dagger.getDirectionY());
+			incrPoint.add(0, (int)(dagger.getPointDirection()));
+			incrTrail.add(0, new Increase());
+
+			incrTrail.get(0).setX(incrX.get(0));
+			incrTrail.get(0).setY(incrY.get(0));
+			incrTrail.get(0).setDirectionX(incrDirX.get(0));
+			incrTrail.get(0).setDirectionY(incrDirY.get(0));
+			incrTrail.get(0).setPointDirection(incrPoint.get(0));
+
+			incrTrail.get(1).setX(incrX.get(1));
+			incrTrail.get(1).setY(incrY.get(1));
+			incrTrail.get(0).setDirectionX(incrDirX.get(0));
+			incrTrail.get(0).setDirectionY(incrDirY.get(0));
+			incrTrail.get(0).setPointDirection(incrPoint.get(0));
+			
+			incrTrail.get(1).setX(incrX.get(1));
+			incrTrail.get(1).setY(incrY.get(1));
+			incrTrail.get(0).setDirectionX(incrDirX.get(0));
+			incrTrail.get(0).setDirectionY(incrDirY.get(0));
+			incrTrail.get(0).setPointDirection(incrPoint.get(0));
+		}else if(incrX.size()==5)
+		{
+			incrX.remove(incrX.size()-1);
+			incrY.remove(incrY.size()-1);
+			incrPoint.remove(incrPoint.size()-1);
+			incrTrail.remove(incrTrail.size()-1);
+			incrX.add(0, dagger.getX());
+			incrY.add(0, dagger.getY());
+			incrPoint.add(0, (int)dagger.getPointDirection());
+			incrTrail.add(0, new Increase());
+			incrTrail.get(0).setX(incrX.get(0));
+			incrTrail.get(0).setY(incrY.get(0));
+			incrTrail.get(0).setPointDirection(incrPoint.get(0));
+		}
+
+	}*/
+	incrFrame++;
+	for (int h = incrDirX.size()-1; h>0;h--)
+	{
+		incrTrail.get(h).show();
+		//println("show");
+		incrTrail.get(h).move();
+		//println("move");
+		/*fill(206, 32, 41);
+		noStroke();
+		ellipse(incrX.get(h), incrY.get(h), h*4, h*4);
+		noFill();*/
+	}
 }
 public void keyPressed()
 {
@@ -85,12 +232,15 @@ public void keyPressed()
 		case 'w':
 			spearAccel(5);
 			spearSideAccel(5);
+			incrAccel(5);
 		break;
 		case 's':
 			spearAccel(-5);
 			spearSideAccel(-5);
+			incrAccel(-5);
 		break;
 		case 'a':
+			incrTurn(-10);
 			if(spin==false)
 			{
 				spearTurn(-10);
@@ -121,6 +271,7 @@ public void keyPressed()
 			}
 		break;
 		case 'd':
+			incrTurn(10);
 			if(spin==false)
 			{
 				spearTurn(10);
@@ -153,6 +304,7 @@ public void keyPressed()
 		case 'f':
 			spearStop();
 			spearSideStop();
+			incrStop();
 		break;
 		case 'e':
 			spin=!spin;
@@ -222,6 +374,27 @@ public void keyPressed()
 				}
 			}
 	}
+}
+void incrShow()
+{
+	dagger.show();
+}
+void incrMove()
+{
+	dagger.move();
+}
+void incrAccel(int a)
+{
+	dagger.accelerate(a);
+}
+void incrTurn(int a)
+{
+	dagger.turn(a);
+}
+void incrStop()
+{
+	dagger.setDirectionX(0);
+	dagger.setDirectionY(0);
 }
 void spearDrill()
 {
