@@ -1,10 +1,10 @@
 //your variable declarations 
 Chastiefol spear;
 ChastiefolSide spearSide;
-RightBlade rBlade;
-SideRightBlade sRBlade;
-LeftBlade lBlade;
-SideLeftBlade sLBlade;
+Coloring rightBlade;
+Coloring sideRightBlade;
+Coloring leftBlade;
+Coloring sideLeftBlade;
 Head head;
 SideHead sHead;
 RightPointCircle rPCircle;
@@ -37,14 +37,14 @@ public void setup()
 {
 	size(1000,1000);
 	background(0,0,0);
-	frameRate(60);
+	frameRate(30);
 	spear=new Chastiefol();
 	spearSide=new ChastiefolSide();
-	rBlade=new RightBlade();
-	sRBlade=new SideRightBlade();
-	lBlade=new LeftBlade();
-	sLBlade=new SideLeftBlade();
-	sBlade=new SideBlade();
+	rightBlade=new Coloring(new int[]{89,84,82,81,59,60,58,55,55},new int[]{0,4,3,5,6,4,2,1,0},color(94,97,104),spear);
+	sideRightBlade=new Coloring(new int[]{89,84,82,81,60,59,60,81,82,84,89},new int[]{0,-2,-1,-2,-2,0,2,2,1,2},color(94,97,104),spear);
+	leftBlade=new Coloring(new int[]{89,84,82,81,59,60,58,55,55},new int[]{0,-4,-3,-5,-6,-4,-2,-1,0},color(163,168,172),spear);
+	sideLeftBlade=new Coloring(new int[]{89,84,82,81,60,59,60,81,82,84,89},new int[]{0,-2,-1,-2,-2,0,2,2,1,2},color(163,168,172),spear);
+    sBlade=new SideBlade();
 	rPCircle=new RightPointCircle();
 	sTCircle=new SideTopCircle();
 	lPCircle=new LeftPointCircle();
@@ -84,18 +84,21 @@ public void draw()
 	//spear.myCenterY=mouseY;
 	if(side==false)
 	{
-		//spearShow();
+		spearShow();
 	}else if(side==true)
 	{
-		//spearSideShow();
+		spearSideShow();
 	}
 	spearMove();
 	spearSideMove();
 	//spearDrill();
-	incrShow();
-	incrMove();
+	
+	//incrShow();
+	//incrMove();
+	
 	//sun.show();
 	//dagger.show();
+	/*
 	if(incrDirX.size()==5)
 	{
 		incrDirX.set(4,incrDirX.get(3));
@@ -164,7 +167,8 @@ public void draw()
 	}
 	for(int i=0;i<5;i++)
 	{
-		incrTrail.get(i).setDirectionX(incrDirX.)
+		incrTrail.get(i).setDirectionX(incrDirX.get(i));
+		incrTrail.get(i).setDirectionY(incrDirY.get(i));
 	}
 	int test=incrDirX.size();
 	//println(test);
@@ -212,7 +216,7 @@ public void draw()
 			incrTrail.get(0).setPointDirection(incrPoint.get(0));
 		}
 
-	}*/
+	}
 	incrFrame++;
 	for (int h = incrDirX.size()-1; h>0;h--)
 	{
@@ -223,8 +227,8 @@ public void draw()
 		/*fill(206, 32, 41);
 		noStroke();
 		ellipse(incrX.get(h), incrY.get(h), h*4, h*4);
-		noFill();*/
-	}
+		noFill();
+	}*/
 }
 public void keyPressed()
 {
@@ -415,8 +419,8 @@ void spearSideMove()
 {
 	spearSide.move();
 	sHead.move();
-	sRBlade.move();
-	sLBlade.move();
+	sideRightBlade.move();
+	sideLeftBlade.move();
 	sTCircle.move();
 	sBCircle.move();
 	sHPoint.move();
@@ -428,9 +432,9 @@ void spearSideShow()
 	sHead.show();
 	if(edge%2==0)
 	{
-		sRBlade.show();
+		sideRightBlade.show();
 	}else{
-		sLBlade.show();
+		sideLeftBlade.show();
 	}
 	sTCircle.show();
 	sBCircle.show();
@@ -445,8 +449,8 @@ void spearSideAccel(int a)
 {
 	spearSide.accelerate(a);
 	sHead.accelerate(a);
-	sRBlade.accelerate(a);
-	sLBlade.accelerate(a);
+	sideRightBlade.accelerate(a);
+	sideLeftBlade.accelerate(a);
 	sTCircle.accelerate(a);
 	sBCircle.accelerate(a);
 	sHPoint.accelerate(a);
@@ -456,8 +460,8 @@ void spearSideTurn(int a)
 {
 	spearSide.turn(a);
 	sHead.turn(a);
-	sRBlade.turn(a);
-	sLBlade.turn(a);
+	sideRightBlade.turn(a);
+	sideLeftBlade.turn(a);
 	sTCircle.turn(a);
 	sBCircle.turn(a);
 	sHPoint.turn(a);
@@ -469,10 +473,10 @@ void spearSideStop()
 	spearSide.setDirectionY(0);
 	sHead.setDirectionX(0);
 	sHead.setDirectionY(0);
-	sRBlade.setDirectionX(0);
-	sRBlade.setDirectionY(0);
-	sLBlade.setDirectionX(0);
-	sLBlade.setDirectionY(0);
+	sideRightBlade.setDirectionX(0);
+	sideRightBlade.setDirectionY(0);
+	sideLeftBlade.setDirectionX(0);
+	sideLeftBlade.setDirectionY(0);
 	sTCircle.setDirectionX(0);
 	sTCircle.setDirectionY(0);
 	sBCircle.setDirectionX(0);
@@ -488,8 +492,8 @@ void spearSideStop()
 void spearMove()
 {
 	spear.move();
-	rBlade.move();
-	lBlade.move();
+	rightBlade.move();
+	leftBlade.move();
 	head.move();
 	rPCircle.move();
 	lPCircle.move();
@@ -506,8 +510,8 @@ void spearMove()
 void spearShow()
 {
 	spear.show();
-	rBlade.show();
-	lBlade.show();
+	rightBlade.show();
+	leftBlade.show();
 	head.show();
 	rPCircle.show();
 	lPCircle.show();
@@ -524,8 +528,8 @@ void spearShow()
 void spearAccel(int a)
 {
 	spear.accelerate(a);
-	rBlade.accelerate(a);
-	lBlade.accelerate(a);
+	rightBlade.accelerate(a);
+	leftBlade.accelerate(a);
 	head.accelerate(a);
 	rPCircle.accelerate(a);
 	lPCircle.accelerate(a);
@@ -542,8 +546,8 @@ void spearAccel(int a)
 void spearSetX(int a)
 {
 	spear.setX(a);
-	rBlade.setX(a);
-	lBlade.setX(a);
+	rightBlade.setX(a);
+	leftBlade.setX(a);
 	head.setX(a);
 	rPCircle.setX(a);
 	lPCircle.setX(a);
@@ -560,8 +564,8 @@ void spearSetX(int a)
 void spearSetY(int a)
 {
 	spear.setY(a);
-	rBlade.setY(a);
-	lBlade.setY(a);
+	rightBlade.setY(a);
+	leftBlade.setY(a);
 	head.setY(a);
 	rPCircle.setY(a);
 	lPCircle.setY(a);
@@ -578,8 +582,8 @@ void spearSetY(int a)
 void spearTurn(int a)
 {
 	spear.turn(a);
-	rBlade.turn(a);
-	lBlade.turn(a);
+	rightBlade.turn(a);
+	leftBlade.turn(a);
 	head.turn(a);
 	rPCircle.turn(a);
 	lPCircle.turn(a);
@@ -597,12 +601,12 @@ void spearStop()
 {
 	spear.setDirectionX(0);
 	spear.setDirectionY(0);
-	rBlade.setDirectionX(0);
-	rBlade.setDirectionY(0);
+	rightBlade.setDirectionX(0);
+	rightBlade.setDirectionY(0);
 	head.setDirectionX(0);
 	head.setDirectionY(0);
-	lBlade.setDirectionX(0);
-	lBlade.setDirectionY(0);
+	leftBlade.setDirectionX(0);
+	leftBlade.setDirectionY(0);
 	rPCircle.setDirectionX(0);
 	rPCircle.setDirectionY(0);
 	lPCircle.setDirectionX(0);
